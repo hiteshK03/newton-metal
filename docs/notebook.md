@@ -50,7 +50,9 @@ IsaacLab uses for GPU RL. Verified: differentiable training converges on Metal, 
 IsaacLab-trained locomotion policy walks on Metal, and 4096 parallel envs step at
 14.4M env-steps/s on Metal."
 
-## df64 note
+## df64 note (historical: superseded 2026-11-13)
+The lab notes below used the df64 emulation. The shipped code no longer does; Newton's inertia kernels run in float32 (README, 'Metal-specific pieces').
+
 Newton's fp64 inertia kernels need the Metal df64 opt-in. run_newton_metal.py and the
 bench/measure scripts patch Module.__init__ to set metal_float64=df64 before importing
 newton. (This is the emulation path; see warp-metal-backend skill.)

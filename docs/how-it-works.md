@@ -3,7 +3,7 @@
 ## Stack
 PyTorch (MPS) PPO  <-  actions / done flags  ->  Warp kernels: obs, reward, reset (one thread per env)  ->  Newton `SolverMuJoCo` (MuJoCo Warp)  ->  Warp on Metal (`metal:0`, via warp-metal)
 
-- **warp-metal** gives Warp a Metal backend: kernels are translated to Metal Shading Language and compiled at runtime. Apple GPUs have no native float64, so float64 kernels are run with an opt-in double-single emulation (`Module.options["metal_float64"] = "df64"`), which `nmrl/anymal_walk_env.py` switches on. df64 is *not* IEEE binary64; it has float32's exponent range.
+- **warp-metal** gives Warp a Metal backend: kernels are translated to Metal Shading Language and compiled at runtime. Apple GPUs have no native float64, so nothing in this project runs in double precision on the GPU: Newton's inertia kernels were switched to float32 in the Newton branch used here (see the README).
 - **Newton** builds the batched model: `ModelBuilder.replicate` copies the robot into N separate worlds (robots in different envs never touch each other), then `CollisionPipeline` + `SolverMuJoCo` step all envs on the GPU.
 - **Unified memory** on Apple silicon means the host can read env state without an explicit copy, but we still keep observations, rewards and resets on the GPU and move only actions in and `done` flags out each step.
 

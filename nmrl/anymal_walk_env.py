@@ -9,11 +9,6 @@ import numpy as np
 import warp as wp
 
 wp.init(); wp.set_device("metal:0")
-import warp._src.context as ctx
-_o = ctx.Module.__init__
-def _p(self, *a, **k):
-    _o(self, *a, **k); self.options["metal_float64"] = "df64"
-ctx.Module.__init__ = _p
 import newton, newton.utils
 
 NQ, NQD, NJ = 19, 18, 12

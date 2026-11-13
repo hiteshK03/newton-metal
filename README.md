@@ -27,18 +27,26 @@ Training the shipped policy: 4096 envs, 1000 PPO updates, 98.3M env-steps in abo
 
 ## Quickstart (macOS, Apple silicon)
 
-Tested with Python 3.14.7, `warp-metal` 1.17.0.3, `mujoco-warp` 3.17.0, torch 2.15.
+Tested with Python 3.14.7, `warp-metal` 1.17.0.4 (see below), `mujoco-warp` 3.17.0, torch 2.15.
 
     python -m venv .venv && source .venv/bin/activate
     pip install -r requirements.txt
-    # Newton: until the Metal changes are upstream, use this branch (2 commits on top of upstream main)
-    git clone -b metal-steel-demos https://github.com/hiteshK03/newton && pip install -e ./newton
+    # Newton: until the Metal changes are upstream, use this branch (3 small commits on top of upstream main)
+    git clone -b metal-float32-inertia https://github.com/hiteshK03/newton && pip install -e "./newton[sim,importers]"
 
     python scripts/eval_walk.py        # expect: 64/64 survive, ~0.76 m/s, ~0.03 m drift
     python scripts/render_walk.py      # writes media/anymal_walk.mp4
 
     # train your own (writes to the path you give; the shipped checkpoint is never overwritten by default runs)
     python -m nmrl.ppo_walk 4096 1000 checkpoints/my_walk.pt
+
+## Metal-specific pieces (what is not stock)
+Two things in the install differ from the upstream projects, and both are temporary:
+
+- **`warp-metal` 1.17.0.4** (a wheel from `hiteshK03/warp-metal`, built from the `metal-df64` branch of [`hiteshK03/warp`](https://github.com/hiteshK03/warp), commit `09ce730b`). innate-inc's released 1.17.0.3 has no `fixedarray_t` on Metal, which Newton's contact code needs. The same change is open as pull requests on `innate-inc/warp` (#21, #22). That branch also contains an experimental float64 emulation (df64) that this project does **not** use.
+- **Newton branch `metal-float32-inertia`** (`hiteshK03/newton`). Three commits on upstream `main`: GJK/MPR scratch buffers that work on Metal, a Metal-compatible native snippet, and float32 in the inertia inverse and eigendecomposition. Apple GPUs have no float64, and for ANYmal the float32 result matches the float64 build to 6e-7 relative (mass and validated inertia bit-identical; walking evaluation unchanged). Not tested: robots with inertia entries below about 1e-12.
+
+Nothing here needs a float64 emulation at runtime.
 
 ## How it works
 One GPU-resident environment: observations, rewards and resets are Warp kernels (one thread per env). Only the actions and the `done` flags cross the host/device boundary each step. See [`docs/how-it-works.md`](docs/how-it-works.md).
