@@ -17,7 +17,7 @@ See the README (macOS on Apple silicon, Python 3.14 tested). Smoke tests:
 
 ## Good first issues
 - Add a second robot (Go2 or similar) with the walking task.
-- Make the PPO loop avoid the per-step host/device copy of actions and done flags.
+- **Performance (profile first: `python scripts/profile_step.py 4096`).** On an M5 Pro the MuJoCo Warp solver is ~97% of an env step; reward, host readback and policy inference are ~2%. The GPU is not saturated (8x more envs costs ~2x solver time), which suggests per-kernel launch overhead. Ideas: measure training throughput at 8192/16384 envs; look at command-buffer batching in warp-metal; check how much of the solver time is df64 (float64 emulation); try fewer line-search iterations / substeps and re-validate the policy.
 - Seeds sweep for the walking policy (3+ seeds) and report the spread.
 - Replace the hard-coded `sys.argv` handling in `nmrl/ppo_*.py` with proper CLI parsing.
 - Port a mimic-style tracker (SuperMimic / BlinkMimic) onto Newton-on-Metal physics.
