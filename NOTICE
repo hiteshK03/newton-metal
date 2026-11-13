@@ -3,3 +3,8 @@ Copyright 2026 hiteshK03 and contributors
 
 Licensed under the Apache License, Version 2.0. See LICENSE.
 Upstream projects, their licences and what we use from them: see ATTRIBUTION.md.
+
+This project downloads and uses an unofficial build of warp-metal (Copyright (c) 2026 David Dobas,
+developed at https://github.com/innate-inc), which contains code derived from NVIDIA Warp
+(https://github.com/NVIDIA/warp), Copyright (c) NVIDIA Corporation, licensed under the Apache
+License 2.0. No part of it is included in this repository.

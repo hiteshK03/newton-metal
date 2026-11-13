@@ -68,7 +68,7 @@ This is not a replication of SuperMimic or BlinkMimic. Porting a mimic-style tra
     media/           GIFs
 
 ## Credits
-Built on NVIDIA Warp, warp-metal (innate-inc), Newton, MuJoCo Warp and PyTorch. Full list with licences and links: [`ATTRIBUTION.md`](ATTRIBUTION.md). Developed with Claude Code and the Hermes agent.
+Built on NVIDIA Warp, warp-metal (by David Dobas, developed at innate-inc), Newton, MuJoCo Warp and PyTorch. Full list with licences and links: [`ATTRIBUTION.md`](ATTRIBUTION.md). Developed with Claude Code and the Hermes agent.
 
 ## Limitations
 Single seed. Flat ground only. Simulation only; no sim-to-real. The ANYmal model is downloaded at runtime from Newton's assets (not redistributed here).
