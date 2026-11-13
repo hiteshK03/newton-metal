@@ -6,7 +6,7 @@ Train a quadruped to walk **from scratch with PPO, entirely on a Mac GPU**: [New
 
 ![ANYmal C walking, trained on an Apple-silicon Mac](media/anymal_walk.gif)
 
-> This is an independent project. It is not affiliated with or endorsed by the Newton project, NVIDIA or Apple; it builds on their open-source work (see [ATTRIBUTION.md](ATTRIBUTION.md)).
+> This is an independent project. It is not affiliated with or endorsed by the Newton project, NVIDIA, Apple or ANYbotics; it builds on their open-source work (see [ATTRIBUTION.md](ATTRIBUTION.md)).
 
 > **Status: early.** Walking is reproducible and measured. The jump work is experimental and only partly working (see below). All results are single-seed.
 

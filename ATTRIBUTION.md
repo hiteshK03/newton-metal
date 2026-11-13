@@ -11,7 +11,9 @@ This project is built on other people's work. Nothing below is endorsed by, or a
 | **Newton** (newton-physics) | Physics engine, model builder, viewer. We run it on a branch of a fork with three small commits on top of upstream `main` that are not upstream yet: GJK/MPR scratch buffers that work on Metal, a Metal-compatible `float_flip` snippet, and float32 in the inertia inverse and eigendecomposition (Apple GPUs have no float64). | Apache-2.0 | https://github.com/newton-physics/newton , fork branch https://github.com/hiteshK03/newton/tree/metal-float32-inertia |
 | **MuJoCo / MuJoCo Warp** (Google DeepMind) | Rigid-body solver behind Newton's `SolverMuJoCo` | Apache-2.0 | https://github.com/google-deepmind/mujoco , https://github.com/google-deepmind/mujoco_warp |
 | **PyTorch** | PPO networks and optimisation on Apple's MPS device | BSD-style | https://pytorch.org |
-| **ANYmal C model** (ANYbotics) | Robot description, downloaded at runtime through Newton's asset helper. Not redistributed here; check its own licence before reuse. | see the asset | via `newton.utils.download_asset("anybotics_anymal_c")` |
+| **ANYmal C model** (ANYbotics AG) | Robot description (`urdf/anymal.urdf` and its meshes), downloaded at runtime through Newton's asset helper from [newton-physics/newton-assets](https://github.com/newton-physics/newton-assets). Not redistributed in this repository. The URDF and meshes there come from https://github.com/ANYbotics/anymal_c_simple_description (commit 87b6851). The images and clips in `media/` show this model. | BSD-3-Clause, Copyright 2020 ANYbotics AG (the asset's own `LICENSE`) | via `newton.utils.download_asset("anybotics_anymal_c")` |
+
+Not used here: the same asset package also contains a USD model (collected from Isaac Sim / Isaac Lab robot assets, with its own terms) and pre-trained policies (Apache-2.0). Neither is loaded or shipped by this project.
 
 ## Algorithms and ideas
 
