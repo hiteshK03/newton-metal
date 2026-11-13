@@ -1,5 +1,12 @@
 # Training / RL on a Mac with Newton (Apple Metal GPU) — verified results
 
+> **Historical lab notes, lightly edited.** These are the raw notes kept while the work progressed, early sections written by the Hermes agent. They are kept for the record, not as documentation.
+> - Script names, policy files (`*.pt`) and video clips mentioned here come from the original working directory and are **not in this repository**. What is shipped: `nmrl/`, `scripts/`, `experiments/jump/`, `checkpoints/anymal_walk.pt`, and the clips in `media/`.
+> - Versions and settings differ from the shipped code: sections 1-4 used `warp-metal` 1.17.0.3 and a float64 emulation (df64) that the shipped code no longer needs.
+> - Section 7 reports an earlier mixed-skill checkpoint that is **not** the shipped one. See the README and `experiments/jump/README.md` for the current jump results and caveats.
+> - For current, reproducible results use [`docs/results.md`](results.md).
+
+
 Hardware: Apple M5 Pro, Metal backend (warp-metal 1.17.0.3), Newton 1.9.0.dev0 fork.
 All results below were produced by actual execution, headless, on `metal:0`.
 
@@ -55,12 +62,12 @@ The lab notes below used the df64 emulation. The shipped code no longer does; Ne
 
 Newton's fp64 inertia kernels need the Metal df64 opt-in. run_newton_metal.py and the
 bench/measure scripts patch Module.__init__ to set metal_float64=df64 before importing
-newton. (This is the emulation path; see warp-metal-backend skill.)
+newton. (This was the emulation path.)
 
 ## 4. Full PPO training loop from scratch on the Mac (added)
 Script: ppo_cartpole_single_long.py (single-pole cartpole, asset cartpole_single_pendulum.usda).
 Physics: Newton + MuJoCo-Warp solver, 256 batched envs on metal:0 (df64 opt-in).
-Policy/PPO: PyTorch on MPS. Env: .venv-metal-main.
+Policy/PPO: PyTorch on MPS. 
 
     python ppo_cartpole_single_long.py 256 300     # 1.84M env-steps in 148 s (~12.5k steps/s)
     python eval_cartpole_single_long.py
@@ -78,7 +85,7 @@ by the simulator (section 3 shows 14M steps/s for sim alone).
 Files: anymal_env.py (GPU-resident batched env, obs/reward/reset as warp kernels),
 train_anymal_ppo.py, eval_anymal.py, anymal_ppo.pt (final policy), anymal_train.log.
 Physics config copied unchanged from newton's robot_anymal_c_walk (SolverMuJoCo, 50 Hz, 4 substeps,
-PD ke=150 kd=5, action scale 0.5). Env: .venv-metal-main. PPO + MLP on MPS.
+PD ke=150 kd=5, action scale 0.5). PPO + MLP on MPS.
 
     python train_anymal_ppo.py 4096 800      # 78.6M env-steps in 26.0 min (~50k steps/s)
     python eval_anymal.py
@@ -129,11 +136,11 @@ What changed:
 Caveats: single seed; flat ground; v3 still 0.76 m/s vs 0.80 commanded; saturation rose to 4.9% in v3.
 Gait judged from contact statistics plus the clips below.
 
-v1 (stooping, drifting)      ![v1](media/anymal_v1.gif)
+v1 (stooping, drifting)  (clip not included)
 
-v2 (level body, hind feet drag)   ![v2](media/anymal_v2.gif)
+v2 (level body, hind feet drag)  (clip not included)
 
-v3 (all four feet step)      ![v3](media/anymal_v3.gif)
+v3 (all four feet step)  (clip not included)
 
 Full videos: anymal_walk.mp4 (v1), anymal_walk_v2.mp4, anymal_walk_v3.mp4. Policies: anymal_ppo.pt, anymal_v2.pt, anymal_v3.pt.
 
@@ -159,4 +166,5 @@ at zero, warm start from the walking policy (anymal_v3.pt), mixed batches (50/25
     high jump  16/16 survive, airtime mean 0.26 s (max 0.30), peak base z 0.71 m max (stand ~0.54, spawn 0.62)
     long jump  16/16 survive, airtime mean 0.16 s, 0.15 m per flight; but 3.5 m in 4 s = fast hopping/bounding, not a single long jump
 Caveats: jumps are small hops, not yet a crouch-and-launch jump; single seed; no reference motions used.
-Clips: media/anymal_multi_walk.gif, anymal_multi_high_jump.gif, anymal_multi_long_jump.gif.
+Note: this is the earlier mixed-skill policy. The later reference-tracking runs (`experiments/jump/`) produced the shipped experimental jump checkpoint, in which the walking skill is probably lost (not tested). The two sets of numbers are for different checkpoints.
+Clips (not included): anymal_multi_walk.gif, anymal_multi_high_jump.gif, anymal_multi_long_jump.gif.
