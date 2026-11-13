@@ -3,5 +3,5 @@ numpy
 torch            # tested with 2.15
 mujoco==3.17.0
 mujoco-warp==3.17.0
-warp-metal==1.17.0.3   # installs warp-lang 1.17.0 next to it
+warp-metal @ https://github.com/innate-inc/warp-metal/releases/download/v1.17.0.3/warp_metal-1.17.0.3-py3-none-macosx_11_0_arm64.whl   # installs warp-lang 1.17.0 next to it; from innate-inc's GitHub release (not in the package index)
 pyglet           # only for rendering videos
