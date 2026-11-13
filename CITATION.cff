@@ -2,7 +2,9 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below, and cite the upstream projects listed in ATTRIBUTION.md."
 title: "newton-metal: robot RL on an Apple-silicon GPU with Newton and warp-metal"
 authors:
-  - name: "hiteshK03 and contributors"
+  - family-names: "Kandala"
+    given-names: "Hitesh"
+    alias: "hiteshK03"
 repository-code: "https://github.com/hiteshK03/newton-metal"
 license: Apache-2.0
 version: 0.1.0
