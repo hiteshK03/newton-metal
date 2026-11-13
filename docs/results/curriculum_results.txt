@@ -1,0 +1,11 @@
+RESULT [start (stage-5 policy)] lam=0.25 (jump 0.18 m, air 0.12 m) | survive 100% | real flights 192 | best flight fwd mean 0.04 max 0.06 m | fwd@2.0s mean 0.13 m | peak z max 0.80 | SUCCESS   0%
+RESULT [start (stage-5 policy)] lam=0.50 (jump 0.36 m, air 0.24 m) | survive 100% | real flights 192 | best flight fwd mean 0.04 max 0.06 m | fwd@2.0s mean 0.13 m | peak z max 0.80 | SUCCESS   0%
+RESULT [C1 (max lam 0.25)] lam=0.25 (jump 0.18 m, air 0.12 m) | survive 100% | real flights 0 | best flight fwd mean 0.00 max 0.00 m | fwd@2.0s mean 0.14 m | peak z max 0.00 | SUCCESS   0%
+RESULT [C1 (max lam 0.25)] lam=0.50 (jump 0.36 m, air 0.24 m) | survive 100% | real flights 0 | best flight fwd mean 0.00 max 0.00 m | fwd@2.0s mean 0.15 m | peak z max 0.00 | SUCCESS   0%
+RESULT [C2 (max lam 0.5)] lam=0.25 (jump 0.18 m, air 0.12 m) | survive 100% | real flights 0 | best flight fwd mean 0.00 max 0.00 m | fwd@2.0s mean 0.21 m | peak z max 0.00 | SUCCESS   0%
+RESULT [C2 (max lam 0.5)] lam=0.50 (jump 0.36 m, air 0.24 m) | survive 100% | real flights 0 | best flight fwd mean 0.00 max 0.00 m | fwd@2.0s mean 0.28 m | peak z max 0.00 | SUCCESS   0%
+RESULT [C2 (max lam 0.5)] lam=1.00 (jump 0.72 m, air 0.48 m) | survive 100% | real flights 0 | best flight fwd mean 0.00 max 0.00 m | fwd@2.0s mean 0.38 m | peak z max 0.00 | SUCCESS   0%
+RESULT [C3 (max lam 1.0)] lam=0.50 (jump 0.36 m, air 0.24 m) | survive 100% | real flights 64 | best flight fwd mean 0.15 max 0.17 m | fwd@2.0s mean 0.39 m | peak z max 0.72 | SUCCESS 100%
+RESULT [C3 (max lam 1.0)] lam=0.75 (jump 0.54 m, air 0.36 m) | survive 100% | real flights 64 | best flight fwd mean 0.18 max 0.19 m | fwd@2.0s mean 0.46 m | peak z max 0.71 | SUCCESS  27%
+RESULT [C3 (max lam 1.0)] lam=1.00 (jump 0.72 m, air 0.48 m) | survive 100% | real flights 64 | best flight fwd mean 0.19 max 0.21 m | fwd@2.0s mean 0.53 m | peak z max 0.70 | SUCCESS   0%
+CURRICULUM_DONE

@@ -1,0 +1,7 @@
+# Tested versions (macOS arm64, Apple M5 Pro). Newton comes from a branch, see README.
+numpy
+torch            # tested with 2.15
+mujoco==3.17.0
+mujoco-warp==3.17.0
+warp-metal==1.17.0.3   # installs warp-lang 1.17.0 next to it
+pyglet           # only for rendering videos

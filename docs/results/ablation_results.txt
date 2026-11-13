@@ -1,0 +1,16 @@
+RESULT A0_baseline@100 | survive 100% | track err (0-2s) 0.364 m | fwd@2.4s mean 0.06 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A0_baseline@200 | survive 100% | track err (0-2s) 0.388 m | fwd@2.4s mean -0.01 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A0_baseline@300 | survive 100% | track err (0-2s) 0.358 m | fwd@2.4s mean 0.04 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A1_rsi@100 | survive 100% | track err (0-2s) 0.357 m | fwd@2.4s mean 0.03 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A1_rsi@200 | survive 100% | track err (0-2s) 0.358 m | fwd@2.4s mean 0.04 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A1_rsi@300 | survive  86% | track err (0-2s) 0.429 m | fwd@2.4s mean -0.06 m | flights 73 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A2_rsi_et@100 | survive 100% | track err (0-2s) 0.351 m | fwd@2.4s mean 0.03 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A2_rsi_et@200 | survive 100% | track err (0-2s) 0.360 m | fwd@2.4s mean 0.03 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A2_rsi_et@300 | survive 100% | track err (0-2s) 0.363 m | fwd@2.4s mean 0.02 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A3_rsi_et_fpr@100 | survive 100% | track err (0-2s) 0.337 m | fwd@2.4s mean 0.10 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A3_rsi_et_fpr@200 | survive 100% | track err (0-2s) 0.336 m | fwd@2.4s mean 0.09 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A3_rsi_et_fpr@300 | survive 100% | track err (0-2s) 0.356 m | fwd@2.4s mean 0.02 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A4_all_jref@100 | survive 100% | track err (0-2s) 0.381 m | fwd@2.4s mean 0.00 m | flights 64 flight-dist mean -0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A4_all_jref@200 | survive 100% | track err (0-2s) 0.373 m | fwd@2.4s mean 0.01 m | flights 64 flight-dist mean -0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+RESULT A4_all_jref@300 | survive 100% | track err (0-2s) 0.368 m | fwd@2.4s mean 0.02 m | flights 64 flight-dist mean 0.00 max 0.00 m | SUCCESS (upright & >=0.5 m)   0%
+ABLATION_DONE
