@@ -4,6 +4,7 @@ __pycache__/
 *.log
 *.mp4
 !media/examples/*.mp4
+!media/montage.mp4
 checkpoints/*_upd*.pt
 checkpoints/*_best.pt
 checkpoints/experimental/*_upd*.pt

@@ -53,7 +53,7 @@ One GPU-resident environment: observations, rewards and resets are Warp kernels 
 
 ## Upstream Newton examples on Metal
 
-We ran 20 examples from Newton's own `newton.examples` headless on `metal:0` with `--test` (the example's built-in success criteria), using unmodified example code. Apple M5 Pro, Newton branch above, warp-metal 1.17.0.4. **11 pass.** Clips (1080p, 10 s each; rendered with `scripts/render_example.py`) are in [`media/examples/`](media/examples/).
+We ran 20 examples from Newton's own `newton.examples` headless on `metal:0` with `--test` (the example's built-in success criteria), using unmodified example code. Apple M5 Pro, Newton branch above, warp-metal 1.17.0.4. **11 pass.** Clips (1080p, 10 s each; rendered with `scripts/render_example.py`) are in [`media/examples/`](media/examples/), and all of them plus the walking clip play together in [`media/montage.mp4`](media/montage.mp4) (`scripts/make_montage.py`).
 
 | Result | Examples |
 |---|---|
