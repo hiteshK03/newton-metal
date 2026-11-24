@@ -38,4 +38,4 @@ No third-party motion data is included. Dog motion-capture sources discussed in 
 
 ## Development
 
-Developed with the assistance of Claude Code (Anthropic) and the Hermes agent. All results in this repository were produced by running the code here; see `docs/results.md` for exact numbers and caveats.
+Developed with the assistance of Claude Code (Anthropic) and the Hermes agent (running Qwen models). All results in this repository were produced by running the code here; see `docs/results.md` for exact numbers and caveats.
