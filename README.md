@@ -2,7 +2,7 @@
 
 **Robot reinforcement learning on an Apple-silicon Mac, with Newton physics on the GPU.**
 
-Train a quadruped to walk **from scratch with PPO, entirely on a Mac GPU**: [Newton](https://github.com/newton-physics/newton) physics (MuJoCo Warp solver) running on Apple Metal through [warp-metal](https://github.com/innate-inc/warp-metal), with the learning done by PyTorch on MPS. No CUDA, no cloud.
+Train a quadruped to walk **from scratch with PPO, entirely on a Mac GPU**: [Newton](https://github.com/newton-physics/newton) physics (MuJoCo Warp solver) running on Apple Metal through [warp-metal](https://github.com/innate-inc/warp-metal), with the learning done by PyTorch on MPS. No CUDA, no cloud. The goal is that anyone with a Mac can train robot policies locally and have fun with it, without renting a GPU.
 
 ![ANYmal C walking, trained on an Apple-silicon Mac](media/anymal_walk.gif)
 
@@ -27,7 +27,7 @@ Training the shipped policy: 4096 envs, 1000 PPO updates, 98.3M env-steps in abo
 
 ## Quickstart (macOS, Apple silicon)
 
-Tested with Python 3.14.7, `warp-metal` 1.17.0.4 (see below), `mujoco-warp` 3.17.0, torch 2.15.
+Tested on one machine only: a MacBook Pro with an Apple M5 Pro and 24 GB of unified memory, macOS 27.0.1. Other Apple-silicon Macs, and machines with 8 or 16 GB, have not been tried; reports of what works or breaks are welcome (see CONTRIBUTING.md). Tested with Python 3.14.7, `warp-metal` 1.17.0.4 (see below), `mujoco-warp` 3.17.0, torch 2.15.
 
     python -m venv .venv && source .venv/bin/activate
     pip install -r requirements.txt
