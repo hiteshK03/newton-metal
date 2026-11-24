@@ -23,7 +23,9 @@ ANYmal C velocity tracking on flat ground, command 0.8 m/s forward, 64 envs, 10 
 | Base height | 0.376 m | 0.530 m | **0.518 m** |
 | Hind feet lift? | n/a | no (dragged) | **yes, symmetric trot** |
 
-Training the shipped policy: 4096 envs, 1000 PPO updates, 98.3M env-steps in about 38 minutes (roughly 40-50k env-steps/s including learning). `docs/results.md` has the full table and how each fix was found.
+Zero-action and random policies also have a 0% fall rate in this test (they stand still: 0.00 m/s forward), so forward speed and drift are the numbers that matter.
+
+Training the shipped policy: 4096 envs, 1000 PPO updates, 98.3M env-steps in about 38 minutes (roughly 40-50k env-steps/s including learning). In a short measurement run (12 updates) 4096 envs gave about 55k env-steps/s with a peak process footprint of about 3 GB, so lower-memory Macs should have room to run it (not tried on any machine other than the 24 GB one). More envs help with diminishing returns; see the scaling table in `docs/results.md`. That doc also has the full results table and how each fix was found.
 
 ## Quickstart (macOS, Apple silicon)
 
