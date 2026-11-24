@@ -16,10 +16,10 @@ M, E = REPO / "media", REPO / "media/examples"
 # (source, label); the first tile is our own PPO result, the rest are unmodified upstream Newton examples
 TILES = [
     (M / "anymal_walk.gif", "ANYmal C, PPO-trained on this Mac (this repo)"),
-    (E / "robot_anymal_d.mp4", "robot_anymal_d"), (E / "robot_g1.mp4", "robot_g1"), (E / "robot_cartpole.mp4", "robot_cartpole"),
-    (E / "robot_ur10.mp4", "robot_ur10"), (E / "robot_allegro_hand.mp4", "robot_allegro_hand"), (E / "ik_franka.mp4", "ik_franka"),
-    (E / "cloth_hanging.mp4", "cloth_hanging"), (E / "pyramid.mp4", "pyramid"), (E / "basic_shapes.mp4", "basic_shapes"),
-    (E / "basic_joints.mp4", "basic_joints"), (E / "newton_cradle.mp4", "newton_cradle"),
+    (E / "franka_cable_ik_pick_place.mp4", "franka_cable_ik_pick_place"), (E / "robot_ur10.mp4", "robot_ur10"),
+    (E / "balance_bird.mp4", "balance_bird"), (E / "domino_spiral.mp4", "domino_spiral"), (E / "cloth_twist.mp4", "cloth_twist"),
+    (E / "cloth_rollers.mp4", "cloth_rollers"), (E / "rigid_soft_contact.mp4", "rigid_soft_contact"), (E / "softbody_gift.mp4", "softbody_gift"),
+    (E / "tendon_pulley.mp4", "tendon_pulley"), (E / "newton_cradle.mp4", "newton_cradle"), (E / "selection_cartpole.mp4", "selection_cartpole"),
 ]
 assert len(TILES) == COLS * ROWS
 for src, _ in TILES:

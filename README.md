@@ -53,18 +53,19 @@ One GPU-resident environment: observations, rewards and resets are Warp kernels 
 
 ## Upstream Newton examples on Metal
 
-We ran 20 examples from Newton's own `newton.examples` headless on `metal:0` with `--test` (the example's built-in success criteria), using unmodified example code. Apple M5 Pro, Newton branch above, warp-metal 1.17.0.4. **11 pass.** Clips (1080p, 10 s each; rendered with `scripts/render_example.py`) are in [`media/examples/`](media/examples/), and all of them plus the walking clip play together in [`media/montage.mp4`](media/montage.mp4) (`scripts/make_montage.py`).
+We ran 50 examples from Newton's own `newton.examples` headless on `metal:0` with `--test` (the example's built-in success criteria), using unmodified example code. Apple M5 Pro, Newton branch above, warp-metal 1.17.0.4. **33 pass, 17 do not.** Clips of the ones that visibly move (1080p, 10 s, rendered with `scripts/render_example.py`) are in [`media/examples/`](media/examples/), and a dozen of them play together with our walking clip in [`media/montage.mp4`](media/montage.mp4) (`scripts/make_montage.py`).
 
 | Result | Examples |
 |---|---|
-| Pass (11) | `basic_shapes`, `basic_joints`, `newton_cradle`, `pyramid`, `robot_cartpole`, `robot_g1`, `robot_anymal_d`, `robot_allegro_hand`, `robot_ur10`, `ik_franka`, `cloth_hanging` |
+| Pass (33) | `basic_shapes`, `basic_joints`, `newton_cradle`, `pyramid`, `balance_bird`, `domino_spiral`, `adaptive_collision`, `robot_cartpole`, `selection_cartpole`, `robot_g1`, `robot_anymal_d`, `robot_allegro_hand`, `robot_ur10`, `ik_franka`, `ik_custom`, `controller_differential_ik`, `controller_joint_impedance_heterogeneous`, `franka_cable_ik_pick_place`, `surface_gripper`, `sensor_contact`, `tendon_pulley`, `tendon_capstan_friction`, `cloth_hanging`, `cloth_twist`, `cloth_rollers`, `cloth_bending`, `cloth_franka`, `cable_twist`, `softbody_hanging`, `softbody_gift`, `softbody_dropping_to_cloth`, `softbody_franka`, `rigid_soft_contact` |
 | Fail the same on CPU, so not Metal-specific (2) | `basic_urdf`, `robot_h1` |
 | Float-noise tolerance (1) | `basic_pendulum`: Metal and CPU agree on position to 5 digits; out-of-plane velocity noise is ~1e-4 vs a 1e-4 test threshold |
-| Needs CUDA by design (2) | `robot_panda_hydro` (SDF texture build), `mujoco_sleeping` |
-| Metal gaps (3) | `ik_h1`, `mpm_granular` (float64 kernels; Metal has no float64), `cable_pile` (MSL compile error: "reference type must have explicit address space qualifier") |
-| Not run (1) | `robot_anymal_c_walk` needs the `warp_nn` package, not installed here |
+| Needs CUDA by design (5) | `robot_panda_hydro`, `mujoco_sleeping`, `brick_stacking`, `nut_bolt_sdf` (SDF texture build), `steel_sleeping` |
+| Metal gaps (5) | `ik_h1`, `mpm_granular`, `cloth_h1` (float64 kernels; Metal has no float64), `cable_pile` (MSL compile error: "reference type must have explicit address space qualifier"), `proxy_joint_gripper` (SolverVBD contact buffer needs to grow during graph capture) |
+| Not yet checked on CPU (2) | `ik_cube_stacking` (task success rate 0.0, expected 0.7+), `robot_omniwheel` (assertion "run too short to exercise all drive phases") |
+| Not run (2) | `robot_anymal_c_walk`, `robot_asroballet` need the `warp_nn` package, not installed here |
 
-A pass means the example's own test completed; it is not a performance or accuracy comparison against CUDA. Single machine, single run.
+A pass means the example's own test completed; it is not a performance or accuracy comparison against CUDA. Several passing examples are static by design (`robot_g1`, `robot_anymal_d` stand and settle; `ik_franka` waits for a user to drag a gizmo), so they have no clip. Several VBD-based passes print a warp-metal warning that one kernel (`apply_rigid_soft_truncation...`) was refused by the record cache; we have not investigated it. Single machine, single run.
 
 ## Related work
 This project builds on [innate-inc/warp-metal](https://github.com/innate-inc/warp-metal). Another independent Metal backend for Warp exists at [APX103/warp-metal](https://github.com/APX103/warp-metal). Details in [ATTRIBUTION.md](ATTRIBUTION.md).
