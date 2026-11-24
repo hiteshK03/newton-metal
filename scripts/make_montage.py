@@ -41,8 +41,8 @@ for i, (_, text) in enumerate(TILES):
     im = Image.new("RGBA", (TW, 26), (0, 0, 0, 170)); ImageDraw.Draw(im).text((8, 4), text, font=font(16), fill=(255, 255, 255, 255))
     labels.append(tmp / f"l{i}.png"); im.save(labels[-1])
 ban = Image.new("RGBA", (TW * COLS, BANNER), (18, 22, 30, 255)); d = ImageDraw.Draw(ban)
-d.text((16, 14), "Newton physics on Apple Metal (M5 Pro): our PPO walking + upstream Newton examples", font=font(30), fill=(255, 255, 255, 255))
-d.text((16, 54), "NVIDIA Warp via warp-metal (innate-inc)  |  Newton / MuJoCo Warp  |  github.com/hiteshK03/newton-metal", font=font(20), fill=(170, 185, 205, 255))
+d.text((16, 12), "Newton examples on Apple Metal", font=font(32), fill=(255, 255, 255, 255))
+d.text((16, 54), "github.com/hiteshK03/newton-metal", font=font(22), fill=(170, 185, 205, 255))
 ban_p = tmp / "banner.png"; ban.save(ban_p)
 
 cmd = ["ffmpeg", "-y", "-loglevel", "error"]
@@ -59,6 +59,6 @@ layout = "|".join(f"{(i % COLS) * TW}_{(i // COLS) * TH}" for i in range(n))
 f.append("".join(f"[v{i}]" for i in range(n)) + f"xstack=inputs={n}:layout={layout}[grid]")
 f.append(f"[grid]pad={TW*COLS}:{TH*ROWS+BANNER}:0:{BANNER}[padded]")
 f.append(f"[padded][{2*n}:v]overlay=0:0,format=yuv420p[out]")
-cmd += ["-filter_complex", ";".join(f), "-map", "[out]", "-t", str(SECS), "-r", "30", "-an", "-vcodec", "libx264", "-crf", "22", OUT]
+cmd += ["-filter_complex", ";".join(f), "-map", "[out]", "-t", str(SECS), "-r", "30", "-an", "-vcodec", "libx264", "-profile:v", "high", "-level", "4.2", "-crf", "22", "-movflags", "+faststart", "-tag:v", "avc1", OUT]
 subprocess.run(cmd, check=True)
 print("wrote", OUT)
