@@ -6,6 +6,9 @@ Train a quadruped to walk **from scratch with PPO, entirely on a Mac GPU**: [New
 
 ![ANYmal C walking, trained on an Apple-silicon Mac](media/anymal_walk.gif)
 
+![Our walking policy (top left) and 11 upstream Newton examples running at once on Apple Metal](media/montage.gif)
+*Our PPO-trained walking policy (top left) and 11 upstream Newton examples, all running on an Apple M5 Pro GPU. [Full-quality MP4](media/montage.mp4); the examples are listed [below](#upstream-newton-examples-on-metal).*
+
 > This is an independent project. It is not affiliated with or endorsed by the Newton project, NVIDIA, Apple or ANYbotics; it builds on their open-source work (see [ATTRIBUTION.md](ATTRIBUTION.md)).
 
 > **Status: early and ongoing.** Walking is reproducible and measured. Jumping is experimental and only partly working, manipulation does not work yet, and several Newton examples still fail on Metal. See [docs/known-gaps.md](docs/known-gaps.md) for the full list. All results are single-seed.
