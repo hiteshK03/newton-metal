@@ -13,6 +13,19 @@ This project is built on other people's work. Nothing below is endorsed by, or a
 | **PyTorch** | PPO networks and optimisation on Apple's MPS device | BSD-style | https://pytorch.org |
 | **ANYmal C model** (ANYbotics AG) | Robot description (`urdf/anymal.urdf` and its meshes), downloaded at runtime through Newton's asset helper from [newton-physics/newton-assets](https://github.com/newton-physics/newton-assets). Not redistributed in this repository. The URDF and meshes there come from https://github.com/ANYbotics/anymal_c_simple_description (commit 87b6851). The images and clips in `media/` show this model. | BSD-3-Clause, Copyright 2020 ANYbotics AG (the asset's own `LICENSE`) | via `newton.utils.download_asset("anybotics_anymal_c")` |
 
+## Robot models shown in the example clips
+
+The clips in `media/` and `media/montage.mp4` show Newton's own examples. Their models are downloaded at runtime through Newton's asset helper from [newton-physics/newton-assets](https://github.com/newton-physics/newton-assets); none of the model files are in this repository, only videos of them being simulated.
+
+| Model (clip) | Source and licence stated in the asset package |
+|---|---|
+| Franka Emika Panda / FR3 (`franka_cable_ik_pick_place`) | Franka Robotics, [`franka_description`](https://github.com/frankarobotics/franka_description); Apache-2.0 |
+| Universal Robots UR10 (`robot_ur10`) | Universal Robots; BSD-3-Clause. The package says its USD was collected with Isaac Sim from the Isaac Lab robot assets; we rely on the licence stated by newton-assets |
+| Wonik Allegro Hand v3 (`robot_allegro_hand`) | Wonik Robotics; BSD-2-Clause, copyright 2016 SimLab; the structured USD was converted from MuJoCo Menagerie |
+| Cartpole, cloth sheet and other example scene files | Shipped with the Newton and NVIDIA Warp repositories (Apache-2.0); we did not find per-file notices |
+
+The other clips (dominoes, balance bird, Newton's cradle, soft bodies, cable and tendon scenes) are built in code from primitive shapes. The ANYmal C walking clip uses the ANYbotics model listed above.
+
 Not used here: the same asset package also contains a USD model (collected from Isaac Sim / Isaac Lab robot assets, with its own terms) and pre-trained policies (Apache-2.0). Neither is loaded or shipped by this project.
 
 ## Other efforts to run Newton / Warp on Apple GPUs (independent; no code from these is used here)

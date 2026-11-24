@@ -67,7 +67,7 @@ We ran 50 examples from Newton's own `newton.examples` headless on `metal:0` wit
 | Not yet checked on CPU (2) | `ik_cube_stacking` (task success rate 0.0, expected 0.7+), `robot_omniwheel` (assertion "run too short to exercise all drive phases") |
 | Not run (2) | `robot_anymal_c_walk`, `robot_asroballet` need the `warp_nn` package, not installed here |
 
-A pass means the example's own test completed; it is not a performance or accuracy comparison against CUDA. Several passing examples are static by design (`robot_g1`, `robot_anymal_d` stand and settle; `ik_franka` waits for a user to drag a gizmo), so they have no clip. Several VBD-based passes print a warp-metal warning that one kernel (`apply_rigid_soft_truncation...`) was refused by the record cache; we have not investigated it. Single machine, single run.
+A pass means the example's own test completed; it is not a performance or accuracy comparison against CUDA. Several passing examples are static by design (`robot_g1`, `robot_anymal_d` stand and settle; `ik_franka` waits for a user to drag a gizmo), so they have no clip. `basic_shapes` has no clip either: its bunny mesh has no licence stated in the Newton repository. Several VBD-based passes print a warp-metal warning that one kernel (`apply_rigid_soft_truncation...`) was refused by the record cache; we have not investigated it. Single machine, single run.
 
 ## Related work
 This project builds on [innate-inc/warp-metal](https://github.com/innate-inc/warp-metal). Another independent Metal backend for Warp exists at [APX103/warp-metal](https://github.com/APX103/warp-metal). Details in [ATTRIBUTION.md](ATTRIBUTION.md).
