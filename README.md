@@ -8,7 +8,7 @@ Train a quadruped to walk **from scratch with PPO, entirely on a Mac GPU**: [New
 
 > This is an independent project. It is not affiliated with or endorsed by the Newton project, NVIDIA, Apple or ANYbotics; it builds on their open-source work (see [ATTRIBUTION.md](ATTRIBUTION.md)).
 
-> **Status: early.** Walking is reproducible and measured. The jump work is experimental and only partly working (see below). All results are single-seed.
+> **Status: early and ongoing.** Walking is reproducible and measured. Jumping is experimental and only partly working, manipulation does not work yet, and several Newton examples still fail on Metal. See [docs/known-gaps.md](docs/known-gaps.md) for the full list. All results are single-seed.
 
 ## What works
 
@@ -51,6 +51,24 @@ Nothing here needs a float64 emulation at runtime.
 ## How it works
 One GPU-resident environment: observations, rewards and resets are Warp kernels (one thread per env). Only the actions and the `done` flags cross the host/device boundary each step. See [`docs/how-it-works.md`](docs/how-it-works.md).
 
+## Upstream Newton examples on Metal
+
+We ran 20 examples from Newton's own `newton.examples` headless on `metal:0` with `--test` (the example's built-in success criteria), using unmodified example code. Apple M5 Pro, Newton branch above, warp-metal 1.17.0.4. **11 pass.** Clips (1080p, 10 s each; rendered with `scripts/render_example.py`) are in [`media/examples/`](media/examples/).
+
+| Result | Examples |
+|---|---|
+| Pass (11) | `basic_shapes`, `basic_joints`, `newton_cradle`, `pyramid`, `robot_cartpole`, `robot_g1`, `robot_anymal_d`, `robot_allegro_hand`, `robot_ur10`, `ik_franka`, `cloth_hanging` |
+| Fail the same on CPU, so not Metal-specific (2) | `basic_urdf`, `robot_h1` |
+| Float-noise tolerance (1) | `basic_pendulum`: Metal and CPU agree on position to 5 digits; out-of-plane velocity noise is ~1e-4 vs a 1e-4 test threshold |
+| Needs CUDA by design (2) | `robot_panda_hydro` (SDF texture build), `mujoco_sleeping` |
+| Metal gaps (3) | `ik_h1`, `mpm_granular` (float64 kernels; Metal has no float64), `cable_pile` (MSL compile error: "reference type must have explicit address space qualifier") |
+| Not run (1) | `robot_anymal_c_walk` needs the `warp_nn` package, not installed here |
+
+A pass means the example's own test completed; it is not a performance or accuracy comparison against CUDA. Single machine, single run.
+
+## Related work
+This project builds on [innate-inc/warp-metal](https://github.com/innate-inc/warp-metal). Another independent Metal backend for Warp exists at [APX103/warp-metal](https://github.com/APX103/warp-metal). Details in [ATTRIBUTION.md](ATTRIBUTION.md).
+
 ## Experimental: jumping (`experiments/jump/`)
 We tried to teach a high jump and a long jump. Honest summary:
 - Reward-only jumping hit **four reward exploits** (sitting on the belly, tucking during the spawn drop, ...). Write-up: [`docs/reward-exploits.md`](docs/reward-exploits.md).
@@ -61,17 +79,17 @@ This is not a replication of SuperMimic or BlinkMimic. Porting a mimic-style tra
 
 ## Layout
     nmrl/            environments and PPO (walk: anymal_walk_env.py, ppo_walk.py; experimental: anymal_multi_env.py, ppo_multi.py)
-    scripts/         eval / diagnose / render the walking policy
+    scripts/         eval / diagnose / render the walking policy; render_example.py renders any upstream Newton example
     experiments/jump reference generation, curriculum, ablation, evals
     checkpoints/     shipped walking policy (0.5 MB); experimental ones under experimental/
     docs/            how-it-works, results, reward-exploits, notebook (raw lab notes)
-    media/           GIFs
+    media/           GIFs; media/examples/ clips of upstream Newton examples running on Metal
 
 ## Credits
 Built on NVIDIA Warp, warp-metal (by David Dobas, developed at innate-inc), Newton, MuJoCo Warp and PyTorch. Full list with licences and links: [`ATTRIBUTION.md`](ATTRIBUTION.md). Developed with Claude Code and the Hermes agent.
 
 ## Limitations
-Single seed. Flat ground only. Simulation only; no sim-to-real. The ANYmal model is downloaded at runtime from Newton's assets (not redistributed here).
+Single seed. Flat ground only. Simulation only; no sim-to-real. Full list of what is missing or unproven (float64, CUDA-only paths, unmerged Newton changes, manipulation): [docs/known-gaps.md](docs/known-gaps.md). The ANYmal model is downloaded at runtime from Newton's assets (not redistributed here).
 
 ## Licence
 Apache-2.0, see [LICENSE](LICENSE) and [NOTICE](NOTICE).

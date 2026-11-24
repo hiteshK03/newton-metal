@@ -15,6 +15,11 @@ This project is built on other people's work. Nothing below is endorsed by, or a
 
 Not used here: the same asset package also contains a USD model (collected from Isaac Sim / Isaac Lab robot assets, with its own terms) and pre-trained policies (Apache-2.0). Neither is loaded or shipped by this project.
 
+## Other efforts to run Newton / Warp on Apple GPUs (independent; no code from these is used here)
+
+- **innate-inc/warp-metal** (David Dobas) is the Metal backend this project builds on; see the table above.
+- **APX103/warp-metal** (https://github.com/APX103/warp-metal) is a separate, independently developed Metal (MSL) backend for Warp with its own Newton fork branch. It describes running Newton and the MuJoCo Warp pipeline on Apple Silicon. We learned of it while checking for related work and have not used its code. Check its README for its current scope and licence.
+
 ## Algorithms and ideas
 
 - PPO: Schulman et al., 2017. GAE: Schulman et al., 2016.
